@@ -6,7 +6,7 @@ Here is My Regression Project based on Predicting Price of Car using Linear Regr
 
 ## Dataset
 
-I used Honda Used Car Selling Dataset which is one of my own Dataset uploaded on Kaggle.
+I used Honda Used Car Selling Dataset which is one of Dataset uploaded on Kaggle.
 
 **Link to the Dataset :** [Honda Used Car Selling](https://www.kaggle.com/datasets/themrityunjaypathak/honda-car-selling)
 
@@ -15,18 +15,6 @@ I used Honda Used Car Selling Dataset which is one of my own Dataset uploaded on
 - The objective of this Project is to develop a Machine Learning Model that can accurately predict the prices of used cars based on various features and attributes.
   
 - The predicted prices will assist both buyers and sellers in making informed decisions, ensuring fair transactions in the used car market.
-
-## Streamlit Web App
-
-- For my Car Price Prediction Project, I have created a Streamlit Web App for predicting the prices of cars in more interactive and user friendly way.
-
-- This Web App allows you to predict the price of a car by just selecting some of its features and fill in some details.
-
-- I have named it AutoValuate.
-
-**Link to the Web App :** [Car Price Prediction App](https://car-price-prediction-using-lr.streamlit.app/)
-
-![image](https://github.com/TheMrityunjayPathak/CarPricePrediction/assets/123563634/b95fdf1a-efb2-49ea-8dfc-d96be84416a8)
 
 ## Table of Contents
 
@@ -81,7 +69,7 @@ Jupyter Notebook is required for this project and you can install and set it up 
 
 - Clone the repository to your local machine using the following command :
 ```
-git clone https://github.com/TheMrityunjayPathak/CarPricePrediction.git
+git clone https://github.com/MasterMindRomii/Car-Price-Prediction-Model.git
 ```
 
 ## Steps involved in the Project
@@ -102,15 +90,9 @@ git clone https://github.com/TheMrityunjayPathak/CarPricePrediction.git
 
 - Visualizing Year with Price by using sns.swarmplot().
 
-![download](https://github.com/TheMrityunjayPathak/CarPricePrediction/assets/123563634/5e23ec76-ebe0-4f42-9d72-24b881eceeff)
-
 - Visualizing kms Driven with Price by using sns.relplot().
 
-![download](https://github.com/TheMrityunjayPathak/CarPricePrediction/assets/123563634/3d7c4b1f-a2b3-47c7-8e0d-86c49aa80313)
-
 - Visualizing Car Model with Price by using sns.relplot() and Suspension as Hue Parameter.
-
-![download](https://github.com/TheMrityunjayPathak/CarPricePrediction/assets/123563634/c5faa6d5-46ed-4995-82fe-ec042beca0e4)
 
 **Dummy Variable**
 
@@ -148,8 +130,4 @@ git clone https://github.com/TheMrityunjayPathak/CarPricePrediction.git
 
 - Further Model showcased its robustness by undergoing rigorous k-fold cross-validation, resulting in a mean cross-validation score of 83%.
 
-## Link to the Notebook
-[Car Price Prediction](https://www.kaggle.com/code/themrityunjaypathak/car-price-prediction-using-linear-regression)
-
-| [Scroll to Top ⬆️](#car-price-prediction) |
-|:---:|
+## Thank you :)
