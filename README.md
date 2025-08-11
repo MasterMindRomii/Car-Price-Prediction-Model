@@ -1,133 +1,97 @@
-## Car Price Prediction
+# 🚗 Car Price Prediction
 
-Hello Everyone,
+Hello Everyone,  
 
-Here is My Regression Project based on Predicting Price of Car using Linear Regression.
+This is my **Regression Project** aimed at predicting used car prices using **Linear Regression**.  
+It demonstrates my skills in **data cleaning, visualization, feature engineering, and model building**.  
 
-## Dataset
+---
 
-I used Honda Used Car Selling Dataset which is one of Dataset uploaded on Kaggle.
+## 📊 Dataset
 
-**Link to the Dataset :** [Honda Used Car Selling](https://www.kaggle.com/datasets/themrityunjaypathak/honda-car-selling)
+**Source:** [Honda Used Car Selling](https://www.kaggle.com/datasets/themrityunjaypathak/honda-car-selling)  
 
-## Problem Statement
+The dataset contains various attributes of used cars, such as **model, fuel type, kilometers driven, suspension, and selling price**.
 
-- The objective of this Project is to develop a Machine Learning Model that can accurately predict the prices of used cars based on various features and attributes.
-  
-- The predicted prices will assist both buyers and sellers in making informed decisions, ensuring fair transactions in the used car market.
+---
 
-## Table of Contents
+## 🎯 Problem Statement
 
-- [Setting up the Enviroment](#setting-up-the-enviroment)
-- [Libraries required for the Project](#libraries-required-for-the-project)
-- [Getting started with Repository](#getting-started)
-- [Steps involved in the Project](#steps-involved-in-the-project)
-- [Conclusion](#conclusion)
-- [Link to the Notebook](#link-to-the-notebook)
+The goal is to develop a **Machine Learning model** that can predict the price of a used car based on its features.  
+This helps buyers and sellers make **data-driven** pricing decisions.
 
-## Setting up the Enviroment
+---
 
-Jupyter Notebook is required for this project and you can install and set it up in the terminal.
+## 🛠 Tech Stack & Libraries
 
-- Install the Notebook - `pip install notebook`
+```python
+import numpy as np 
+import pandas as pd
+from matplotlib import pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.linear_model import LinearRegression
+%matplotlib inline
+📂 Project Workflow
+1️⃣ Data Loading & Exploration
+python
+Copy
+Edit
+df = pd.read_csv("honda_car_selling.csv")
+df.head()
+df.info()
+df.shape
+2️⃣ Data Cleaning
+Removed extra whitespaces from Fuel Type, Suspension, and Car Model.
 
-- Run the Notebook - `jupyter notebook`
+Converted kms driven into integers after stripping "kms".
 
-## Libraries required for the Project
+Converted price from "6.45 Lakh" to 645000 using a custom function.
 
-**NumPy**
+python
+Copy
+Edit
+df['Fuel_Type'] = df['Fuel_Type'].str.strip()
+df['Suspension'] = df['Suspension'].str.strip()
+df['Car_Model'] = df['Car_Model'].str.strip()
 
-- Go to Terminal and run this code - `pip install numpy`
+df['kms_driven'] = df['kms_driven'].str.split().str[0].astype(int)
 
-- Go to Jupyter Notebook and run this code from a cell - `!pip install numpy`
+def convert_price(price_str):
+    return int(float(price_str.split()[0]) * 100000)
 
-**Pandas**
+df['Price'] = df['Price'].apply(convert_price)
+3️⃣ Data Visualization
+python
+Copy
+Edit
+sns.swarmplot(x='Year', y='Price', data=df)
+sns.relplot(x='kms_driven', y='Price', data=df)
+sns.relplot(x='Car_Model', y='Price', hue='Suspension', data=df)
+4️⃣ Feature Engineering
+python
+Copy
+Edit
+df = pd.get_dummies(df, columns=['Fuel_Type', 'Suspension'], drop_first=True)
+5️⃣ Model Building & Evaluation
+python
+Copy
+Edit
+X = df.drop('Price', axis=1)
+y = df['Price']
 
-- Go to Terminal and run this code - `pip install pandas`
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-- Go to Jupyter Notebook and run this code from a cell - `!pip install pandas`
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-**Matplotlib**
+cv = KFold(n_splits=10)
+scores = cross_val_score(model, X, y, cv=cv, scoring='r2')
+print("Cross-validation scores:", scores)
+print("Mean R² score:", scores.mean())
+📌 Conclusion
+Developed a Linear Regression Model to predict car prices based on multiple attributes.
 
-- Go to Terminal and run this code - `pip install matplotlib`
+Achieved an average prediction accuracy of ~82%.
 
-- Go to Jupyter Notebook and run this code from a cell - `!pip install matplotlib`
-
-**Seaborn**
-
-- Go to Terminal and run this code - `pip install seaborn`
-
-- Go to Jupyter Notebook and run this code from a cell - `!pip install seaborn`
-
-**Sklearn**
-
-- Go to Terminal and run this code - `pip install sklearn`
-
-- Go to Jupyter Notebook and run this code from a cell - `!pip install sklearn`
-
-## Getting Started
-
-- Clone the repository to your local machine using the following command :
-```
-git clone https://github.com/MasterMindRomii/Car-Price-Prediction-Model.git
-```
-
-## Steps involved in the Project
-
-**Data Cleaning**
-
-- Fuel Type, Suspension and Car Model has extra whitespaces which is removed by str.strip() Method.
-
-- Removing kms Suffix from kms Driven Column by using str.split() Method and keeping only Numeric Part of the String and removing kms Suffix.
-
-- After that we can convert kms Driven Column to int DataType.
-
-- Modifying Price Column from 6.45 Lakh to 645000 and convering it into Integer by using a Custom Made Function.
-
-- From Car Model Column we will keep only First 3 Words of Cae Model and removing the rest of the Words for better Model Traning.
-
-**Data Visualization**
-
-- Visualizing Year with Price by using sns.swarmplot().
-
-- Visualizing kms Driven with Price by using sns.relplot().
-
-- Visualizing Car Model with Price by using sns.relplot() and Suspension as Hue Parameter.
-
-**Dummy Variable**
-
-- We first Create Dummy Variable Column based on the Text Column.
-
-- Then we change it into a DataFrame.
-
-- After that we will Merge the Dummies DataFrame and our Orignal DataFrame.
-
-- Finally we will drop the Text Column from our Dataset.
-
-**Outlier Removal**
-
-- After describing the Dataset I noticed that in our kms Driven Column, 75% of Cars has driven 85000 kms and our Maximum Value in kms Driven is 11 Lakh kms which is an Outlier.
-  
-- And Similarly In our Price Column, 75% of Cars has Price 7 Lakh and our Maximum Price is 26 Lakh which is an Outlier.
-
-**Model Building**
-
-- Firstly I have definied Dependent and Independent Variables for our Traning and Testing.
-
-- I have splitted data into Traning and Testing Set by using Train Test Split.
-
-- Then I fitted the Model with X_train and y_train and checked the Score.
-
-- After that I used KFold Cross Validation for Measuring Accuracy of our Model.
-
-- So I cheked Cross_Val_Score of our Model for Measuring the Best Score of Model and then I have taken Mean of All that Scores.
-
-- And Finally I predicted the Result from our Trained Model.
-
-## Conclusion
-
-- Developed a highly accurate Linear Regression Model using various features and attributes to predict used car prices, achieving an average prediction accuracy of 82%.
-
-- Further Model showcased its robustness by undergoing rigorous k-fold cross-validation, resulting in a mean cross-validation score of 83%.
-
-## Thank you :)
+Validated model performance using K-Fold Cross Validation with a mean R² score of ~83%.
