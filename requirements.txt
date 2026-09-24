@@ -1,4 +1,4 @@
 pip 
-streamlit==1.37.0
+streamlit==1.40.0
 pandas
 scikit-learn
